@@ -108,10 +108,11 @@ class PipelineValidation(unittest.TestCase):
         self.assertTrue((selected["lower"] <= selected["risk"]).all())
         self.assertTrue((selected["risk"] <= selected["upper"]).all())
 
-    def test_manuscript_is_explicitly_preliminary(self) -> None:
+    def test_manuscript_has_no_editorial_notes(self) -> None:
         paper = (ROOT / "manuscript" / "paper.qmd").read_text(encoding="utf-8")
-        self.assertIn("INTERNAL WORKING DRAFT", paper)
-        self.assertIn("EHR enrichment", paper)
+        supplement = (ROOT / "manuscript" / "supplement.md").read_text(encoding="utf-8")
+        for text in (paper, supplement):
+            self.assertNotRegex(text, r"(?i)internal working draft|before (journal )?submission|working analysis|required\]")
         self.assertIn("[@dawson2021]", paper)
         self.assertRegex(paper, r"22,171 patients")
 

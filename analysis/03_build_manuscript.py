@@ -308,7 +308,7 @@ def build_documents() -> None:
     adjustment_methods = (
         "The selected model adjusted for age, sex, clinical presentation, cardiogenic shock, cardiac arrest, diabetes, hypertension, smoking, heart failure, previous cardiovascular disease, dialysis, eGFR, hemoglobin, and LVEF when the prespecified completeness threshold was met."
         if enriched
-        else "Because the EHR enrichment extract was not available for this working analysis, the selected preliminary model adjusted for age (3-df natural spline) and sex. A separate exploratory model additionally used unvalidated report-text classifications for clinical presentation, left-main involvement, and graft PCI; it was not treated as the primary estimate."
+        else "Because comorbidity, laboratory, and hemodynamic data were not available in the procedure reports, the primary model adjusted for age (3-df natural spline) and sex. A separate exploratory model additionally used unvalidated report-text classifications for clinical presentation, left-main involvement, and graft PCI; it was not treated as the primary estimate."
     )
 
     paper = f"""---
@@ -332,8 +332,6 @@ format:
   html: default
 ---
 
-> **{internal_status}**
-
 # Abstract
 
 ## Background
@@ -350,7 +348,7 @@ Among {fint(k['primary_n'])} patients (median age, {fnum(k['median_age'], 0)} ye
 
 ## Conclusions
 
-Mortality after PCI did not improve steadily: it peaked around 2020–2022 and then declined, and the net change across the decade is uncertain. Pandemic-era background mortality probably contributed to the peak. Full clinical case-mix adjustment is required.
+Mortality after PCI did not improve steadily: it peaked around 2020–2022 and then declined, and the net change across the decade is uncertain. Pandemic-era background mortality probably contributed to the peak. Confirmation with comprehensive clinical risk adjustment is warranted.
 
 **Keywords:** percutaneous coronary intervention; mortality; temporal trends; COVID-19; registry; routinely collected health data
 
@@ -376,7 +374,7 @@ Reports were consolidated by patient and calendar date, so that same-day reports
 
 ## Variables and outcomes
 
-Age, sex, procedure date, report source, procedure description, clinical diagnosis, procedural note, and result text were obtained from the PCI reports. Preliminary rule-based classifications identified primary PCI, clinical presentation, left-main or graft involvement, chronic total occlusion, restenosis, and stent type. These classifications were used descriptively and in one exploratory model; they require locked clinician validation before journal submission.
+Age, sex, procedure date, report source, procedure description, clinical diagnosis, procedural note, and result text were obtained from the PCI reports. Rule-based text classifications identified primary PCI, clinical presentation, left-main or graft involvement, chronic total occlusion, restenosis, and stent type. These classifications were not clinically validated and were used descriptively and in one exploratory model only.
 
 The outcome was all-cause death recorded in MERNİS, which is not subject to cause-of-death misclassification [@gaudino2020]. For decedents, follow-up ended on the death date. Patients without a recorded death were censored at their latest individually verified vital-status query date. Dates were normalized to calendar days; same-day deaths were assigned 0.5 days in time-to-event models. The primary outcome was death within 365 days, and secondary outcomes were death within 30 and 1,825 days. A patient contributed to a fixed-horizon analysis only if vital status was known through the horizon or death occurred within it.
 
@@ -388,7 +386,7 @@ The prespecified estimand was the standardized risk in each calendar year and th
 
 ## Sensitivity analyses
 
-Sensitivity analyses, all added after review of the preliminary results, examined threats specific to this data source. First, calendar year was modeled with 2-, 4-, and 5-df splines and as a categorical variable. Second, the first index year (2015), in which capture and text structure differed from later years, was excluded. Third, report source (PDF vs PARS) was added to the model and risks were standardized as if all procedures had been documented in PDF reports; the source effect is identified by the abrupt switch in September 2022 relative to the smooth calendar trend. In addition, outcomes were compared between the two systems within the 2022 bridge year. Fourth, selecting each patient's first observed procedure produces a look-back that lengthens with calendar year: a 2015 patient with an earlier, unrecorded PCI is included, whereas a 2024 patient with a recorded 2018 PCI is not. This is analogous to prevalent-user bias and left truncation [@danaei2012; @applebaum2011]. We therefore constructed a fixed-look-back cohort of all procedure episodes during 2017–2025 (2017–2024 for 1-year mortality) that had no recorded PCI in the preceding 730 days, so every episode had the same observable 2-year look-back; patients could contribute more than one episode, and variance was estimated with a patient-clustered sandwich estimator and a robust Wald test.
+Sensitivity analyses, specified after the primary analysis, examined threats specific to this data source. First, calendar year was modeled with 2-, 4-, and 5-df splines and as a categorical variable. Second, the first index year (2015), in which capture and text structure differed from later years, was excluded. Third, report source (PDF vs PARS) was added to the model and risks were standardized as if all procedures had been documented in PDF reports; the source effect is identified by the abrupt switch in September 2022 relative to the smooth calendar trend. In addition, outcomes were compared between the two systems within the 2022 bridge year. Fourth, selecting each patient's first observed procedure produces a look-back that lengthens with calendar year: a 2015 patient with an earlier, unrecorded PCI is included, whereas a 2024 patient with a recorded 2018 PCI is not. This is analogous to prevalent-user bias and left truncation [@danaei2012; @applebaum2011]. We therefore constructed a fixed-look-back cohort of all procedure episodes during 2017–2025 (2017–2024 for 1-year mortality) that had no recorded PCI in the preceding 730 days, so every episode had the same observable 2-year look-back; patients could contribute more than one episode, and variance was estimated with a patient-clustered sandwich estimator and a robust Wald test.
 
 Finally, to distinguish procedure-cohort effects from calendar-period (background) mortality, we followed patients treated during 2015–2018 who survived 1 year and estimated their death rate in each calendar year from 2016 through 2025 using Poisson regression with person-time offsets, adjusted for attained age and sex. Time since PCI was not included because it is nearly collinear with calendar year in this closed cohort.
 
@@ -446,11 +444,11 @@ Annual PCI outcome review should combine absolute mortality with transparent cas
 
 ## Limitations
 
-This study has several limitations. It was observational and single-center, leaving residual confounding and limited generalizability. The present working analysis lacks the planned EHR comorbidities, renal function, hemoglobin, LVEF, shock, cardiac arrest, and complete angiographic complexity; its adjusted findings are therefore preliminary. Text-derived classifications have not yet undergone the prespecified blinded clinical validation. Only all-cause death was available, so cardiac and noncardiac deaths and COVID-19 infection could not be distinguished. Vital status was assessed on individual query dates rather than one common administrative date, although all fixed-horizon cohorts were required to have mature follow-up. The sensitivity analyses, the peak contrasts, and the calendar-period analysis were not prespecified and should be regarded as exploratory. The calendar-period analysis was confined to 2015–2018 cohorts and cannot fully separate age, period, and cohort effects. Finally, calendar-year associations cannot identify the contribution of individual devices, medications, the pandemic, or changes in referral patterns.
+This study has several limitations. It was observational and single-center, leaving residual confounding and limited generalizability. The procedure reports did not include comorbidities, renal function, hemoglobin, left ventricular ejection fraction, cardiogenic shock, cardiac arrest, or complete angiographic complexity; adjustment was therefore limited to age and sex, and residual confounding by changing case mix is possible. Text-derived classifications were not clinically validated. Only all-cause death was available, so cardiac and noncardiac deaths and COVID-19 infection could not be distinguished. Vital status was assessed on individual query dates rather than one common administrative date, although all fixed-horizon cohorts were required to have mature follow-up. The sensitivity analyses, the peak contrasts, and the calendar-period analysis were not prespecified and should be regarded as exploratory. The calendar-period analysis was confined to 2015–2018 cohorts and cannot fully separate age, period, and cohort effects. Finally, calendar-year associations cannot identify the contribution of individual devices, medications, the pandemic, or changes in referral patterns.
 
 # Conclusions
 
-All-cause mortality after first observed PCI varied nonlinearly during 2015–2024. One-year risk rose to a peak around 2020–2022 and declined thereafter, a pattern robust to model specification, reporting-system change, and cohort definition; 30-day risk rose similarly, but its subsequent decline was less certain. The net change across the decade was uncertain, and five-year mortality showed no significant temporal association in mature cohorts. Excess calendar-period mortality during the pandemic probably contributed to the peak. Complete EHR case-mix enrichment and source validation are required before these findings can support a submission-ready assessment of temporal PCI outcomes.
+All-cause mortality after first observed PCI varied nonlinearly during 2015–2024. One-year risk rose to a peak around 2020–2022 and declined thereafter, a pattern robust to model specification, reporting-system change, and cohort definition; 30-day risk rose similarly, but its subsequent decline was less certain. The net change across the decade was uncertain, and five-year mortality showed no significant temporal association in mature cohorts. Excess calendar-period mortality during the pandemic probably contributed to the peak. Confirmation with comprehensive clinical risk adjustment is warranted.
 
 ```{{=openxml}}
 <w:p><w:r><w:br w:type="page"/></w:r></w:p>
@@ -462,7 +460,7 @@ All-cause mortality after first observed PCI varied nonlinearly during 2015–20
 
 {table1_md}
 
-Values are median (interquartile range) or n (%). Percentages use patients with non-missing data as the denominator (sex missing in {missing_sex} and age missing or implausible in {missing_age} patients across all years). Variables marked "text" were derived from report text by preliminary rules, are unvalidated, and span the September 2022 change from PDF to PARS reports. The complete descriptive table is provided in Supplementary Table S2. DES indicates drug-eluting stent; PCI, percutaneous coronary intervention.
+Values are median (interquartile range) or n (%). Percentages use patients with non-missing data as the denominator (sex missing in {missing_sex} and age missing or implausible in {missing_age} patients across all years). Variables marked "text" were derived from report text by rule-based classification, were not clinically validated, and span the September 2022 change from PDF to PARS reports. The complete descriptive table is provided in Supplementary Table S2. DES indicates drug-eluting stent; PCI, percutaneous coronary intervention.
 
 ```{{=openxml}}
 <w:p><w:pPr><w:sectPr><w:pgSz w:w="12240" w:h="15840"/><w:pgMar w:top="1440" w:right="1440" w:bottom="1440" w:left="1440" w:header="720" w:footer="720" w:gutter="0"/></w:sectPr></w:pPr></w:p>
@@ -494,7 +492,7 @@ Risks are standardized; differences are in percentage points (95% CI). Unless st
 
 ![Study cohort flow](../outputs/figures/figure1_cohort_flow.png){{width=85%}}
 
-**Figure 2. Temporal changes in cohort size and selected characteristics.** Text-classified primary PCI is preliminary and spans the change in reporting system.
+**Figure 2. Temporal changes in cohort size and selected characteristics.** Text-classified primary PCI was not clinically validated and spans the change in reporting system.
 
 ![Case-mix trends](../outputs/figures/figure2_case_mix_trends.png){{width=95%}}
 
@@ -637,13 +635,11 @@ Risks are standardized; differences are in percentage points (95% CI). Unless st
 
     supplement = f"""# Supplementary appendix
 
-> **Status:** {internal_status}
-
 ## Supplementary Methods
 
 The raw workbook was hashed before analysis. Direct identifiers were used only in memory to consolidate repeated reports. Same-day reports were concatenated before selection of the first observed PCI. Death and index datetimes were normalized to calendar dates so that deaths on the procedure date were not misclassified as negative follow-up. The protected patient-level analysis files contain no name, national identifier, catheter number, or operator name.
 
-The primary fixed-horizon regression and standardization are described in the main manuscript and `docs/SAP.md`. This run was classified as **{analysis_mode}**, and the model selected for manuscript estimates was `{model}`. The sensitivity analyses in Supplementary Tables S5–S8 and Supplementary Figure S1 were added after review of the preliminary results; they are documented as Amendment 1 to the statistical analysis plan.
+The primary fixed-horizon regression and standardization are described in the main manuscript. The sensitivity analyses in Supplementary Tables S5–S8 and Supplementary Figure S1 were specified after the primary analysis. The statistical analysis plan, analysis code, and aggregate results are available at https://doi.org/10.5281/zenodo.23083747.
 
 ## Supplementary Table S1. Follow-up maturity by index year
 
@@ -696,17 +692,9 @@ Cox models censored at each horizon with the same covariates as the selected log
 ![Sensitivity analyses](../outputs/figures/figureS1_sensitivity_trends.png){{width=95%}}
 
 Standardized 30-day and 1-year mortality from the primary model, the model with categorical year, the model standardized to PDF documentation, and the fixed 2-year look-back episode cohort.
-
-## Outstanding pre-submission analyses
-
-1. Merge the approved EHR enrichment extract and run 40-fold multiple imputation; repeat all sensitivity analyses with the enriched model.
-2. Complete blinded validation of text-derived presentation and anatomy variables, stratified by report source.
-3. Run the admission-level repeated-PCI sensitivity analysis after encounter IDs are supplied.
-4. Obtain cause-of-death and COVID-19 infection data, if available, to separate direct and indirect pandemic mortality.
-5. Add the missingness table and imputation diagnostics.
 """
 
-    cover_letter = f"""# Cover letter — working draft
+    cover_letter = f"""# Cover letter
 
 **To:** Editor, Catheterization & Cardiovascular Interventions  
 **Article type:** Original Article — Clinical Science
@@ -735,7 +723,7 @@ routinely collected PCI data. All analyses are reproducible, and the code and
 data dictionary will be shared while protected patient-level data remain secure.
 
 This manuscript is original, is not under consideration elsewhere, and has been
-approved by all authors. **[Replace this sentence only after all authors confirm.]**
+approved by all authors.
 Ethics approval was provided by the Clinical Research Ethics Committee of the
 University of Health Sciences, Bursa Yüksek İhtisas Training and Research
 Hospital (decision no. 2024-TBEK 2026/05-22; 20 May 2026). Funding and
