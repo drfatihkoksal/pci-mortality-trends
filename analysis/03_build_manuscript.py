@@ -516,7 +516,7 @@ Risks are standardized; differences are in percentage points (95% CI). Unless st
 
 **Author contributions (CRediT):** Fatih Köksal: Conceptualization, Methodology, Formal analysis, Investigation, Writing – original draft, Writing – review & editing. Fatih Levent, Fatih Koca, Kübra Severgün, Tolga Doğan, and Mahmut Kapsız: Data curation, Writing – review & editing. Mehmet Melek, Fahriye Vatansever Ağca, and Erhan Tenekecioğlu: Supervision, Writing – review & editing. Hasan Arı: Supervision, Project administration, Writing – review & editing.
 
-**Data availability:** Patient-level data contain protected health information and cannot be shared publicly. De-identified aggregate outputs, the complete analysis code, and the variable dictionary will be made publicly available at **[repository DOI/URL required]**.
+**Data availability:** Patient-level data contain protected health information and cannot be shared publicly. The complete analysis code, aggregate results, statistical analysis plan, and variable dictionary are publicly available at https://github.com/drfatihkoksal/pci-mortality-trends.
 
 **Declaration of generative AI and AI-assisted technologies:** During manuscript preparation, the authors used AI coding assistants (OpenAI Codex and Anthropic Claude Code) to assist with reproducible code generation, sensitivity-analysis implementation, literature retrieval, language drafting, and consistency checks. The authors reviewed and verified all analyses, citations, and text and take full responsibility for the content.
 
