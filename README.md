@@ -1,5 +1,7 @@
 # Temporal trends in all-cause mortality after PCI, 2015–2024
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23083746.svg)](https://doi.org/10.5281/zenodo.23083746)
+
 Analysis code, aggregate results, and documentation for:
 
 > Köksal F, Levent F, Koca F, Severgün K, Doğan T, Kapsız M, Melek M,
@@ -69,8 +71,9 @@ published results is recorded in `outputs/audit/r_session_info.txt`.
 ## Licence
 
 Code is released under the MIT licence (`LICENSE`). Aggregate data, figures,
-and documentation are released under CC BY 4.0. Please cite the article (and
-this repository; see `CITATION.cff`) when reusing them.
+and documentation are released under CC BY 4.0. Please cite the article and this
+repository when reusing them: version 1.0.0, https://doi.org/10.5281/zenodo.23083747
+(all versions: https://doi.org/10.5281/zenodo.23083746; see `CITATION.cff`).
 
 ## Contact
 
