@@ -1,0 +1,96 @@
+{
+  "source_rows": 42661,
+  "source_columns": 25,
+  "exact_duplicate_rows": 273,
+  "direct_identifier_columns_present": [
+    "DoktorAdi1",
+    "DoktorAdi2",
+    "HastaAdSoyad",
+    "KataterNo",
+    "TcKimlik",
+    "patientID"
+  ],
+  "invalid_age_rows": 10,
+  "missing_patient_id_rows": 0,
+  "missing_index_date_rows": 0,
+  "unique_source_patients": 27567,
+  "same_day_report_rows_collapsed": 5060,
+  "procedure_days": 37601,
+  "first_observed_patients": 27567,
+  "patients_with_multiple_source_records": 9906,
+  "death_before_index_patients": 53,
+  "same_day_death_patients": 344,
+  "index_date_min": "2002-03-08",
+  "index_date_max": "2026-06-16",
+  "first_observed_by_year": {
+    "2002": 1,
+    "2010": 1,
+    "2014": 3,
+    "2015": 1607,
+    "2016": 2101,
+    "2017": 2246,
+    "2018": 1683,
+    "2019": 2575,
+    "2020": 1632,
+    "2021": 2056,
+    "2022": 2489,
+    "2023": 2811,
+    "2024": 3005,
+    "2025": 3517,
+    "2026": 1840
+  },
+  "missing_sex_patients": 98,
+  "missing_age_patients": 110,
+  "source_system_by_year": {
+    "2002": {
+      "PDF": 1
+    },
+    "2010": {
+      "PDF": 1
+    },
+    "2014": {
+      "PDF": 3
+    },
+    "2015": {
+      "PDF": 1607
+    },
+    "2016": {
+      "PDF": 2101
+    },
+    "2017": {
+      "PDF": 2246
+    },
+    "2018": {
+      "PDF": 1683
+    },
+    "2019": {
+      "PDF": 2575
+    },
+    "2020": {
+      "PDF": 1632
+    },
+    "2021": {
+      "PDF": 2056
+    },
+    "2022": {
+      "PDF": 1626,
+      "PARS": 863
+    },
+    "2023": {
+      "PARS": 2811
+    },
+    "2024": {
+      "PARS": 3005
+    },
+    "2025": {
+      "PARS": 3517
+    },
+    "2026": {
+      "PARS": 1840
+    }
+  },
+  "source_file": "KoronerArterMudahale_birlesik_mortalite.xlsx",
+  "source_sha256": "66c8d91eaea7ea5b5dfa9363ec87ee6adc2e5f890dfe442f05d86c7bb6b2fac6",
+  "ehr_enrichment_status": "not supplied; limited-adjustment run",
+  "ehr_columns_added": []
+}

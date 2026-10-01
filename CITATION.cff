@@ -1,0 +1,39 @@
+cff-version: 1.2.0
+message: "If you use this code or these aggregate results, please cite them as below."
+title: "Temporal trends in all-cause mortality after PCI, 2015–2024: analysis code and aggregate results"
+type: software
+license: MIT
+date-released: 2026-10-01
+version: 1.0.0
+authors:
+  - family-names: Köksal
+    given-names: Fatih
+    orcid: https://orcid.org/0000-0002-4197-4683
+    affiliation: "University of Health Sciences, Bursa Yüksek İhtisas Training and Research Hospital"
+  - family-names: Levent
+    given-names: Fatih
+    orcid: https://orcid.org/0000-0002-7160-4050
+  - family-names: Koca
+    given-names: Fatih
+    orcid: https://orcid.org/0000-0002-6824-1017
+  - family-names: Severgün
+    given-names: Kübra
+    orcid: https://orcid.org/0000-0001-5789-5691
+  - family-names: Doğan
+    given-names: Tolga
+    orcid: https://orcid.org/0000-0001-7074-1419
+  - family-names: Kapsız
+    given-names: Mahmut
+    orcid: https://orcid.org/0000-0001-5412-594X
+  - family-names: Melek
+    given-names: Mehmet
+    orcid: https://orcid.org/0000-0002-9510-9206
+  - family-names: Vatansever Ağca
+    given-names: Fahriye
+    orcid: https://orcid.org/0000-0002-1401-2980
+  - family-names: Tenekecioğlu
+    given-names: Erhan
+    orcid: https://orcid.org/0000-0003-4376-2833
+  - family-names: Arı
+    given-names: Hasan
+    orcid: https://orcid.org/0000-0002-9681-2374

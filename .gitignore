@@ -1,0 +1,29 @@
+# Protected patient-level data
+data/private/*
+!data/private/README.md
+
+# Source workbooks may contain direct identifiers
+*.xlsx
+*.xls
+*.xlsb
+
+# Generated output that may contain small-cell or sensitive summaries
+outputs/audit/private_*
+
+# R/Python caches
+.Rhistory
+.RData
+.Rproj.user/
+renv/library/
+renv/staging/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Office lock files
+~$*
+
+# Manuscript drafts are not part of the public repository
+manuscript/*
+!manuscript/references.bib
+submission/
